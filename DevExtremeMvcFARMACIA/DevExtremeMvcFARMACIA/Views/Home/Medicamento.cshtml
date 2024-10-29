@@ -1,0 +1,85 @@
+@using DevExtremeMvcFARMACIA.Models
+@using DevExtreme.AspNet.Mvc
+@using DevExtreme.AspNet.Mvc.Builders
+
+@{
+    /**/
+
+    /**/
+
+
+
+    ViewBag.Title = "Medicamento";
+}
+<h2 style="color: #0094ff;">Medicamentos</h2>
+@(Html.DevExtreme().DataGrid<DevExtremeMvcFARMACIA.Models.Medicamento>()
+                            .DataSource(ds => ds.WebApi()
+                                .Controller("Medicamento")
+                                .LoadAction("Get")
+                                .InsertAction("Post")
+                                .UpdateAction("Put")
+                                .DeleteAction("Delete")
+                                .Key("Id")
+                            )
+                            .RemoteOperations(true)
+                            .Columns(columns =>
+                            {
+                                columns.AddFor(m => m.Id).Caption("ID");
+                                columns.AddFor(m => m.Presentacion).Caption("Presentacion");
+                                columns.AddFor(m => m.Nombre).Caption("Nombre");
+                                columns.AddFor(m => m.Categoria).Caption("Categoria");
+                                
+                                columns.AddFor(m => m.Precio).Caption("Precio");
+                                columns.AddFor(m => m.Existencia).Caption("Existencia");
+                                columns.AddFor(m => m.proveedorId)
+              .Lookup(lookup =>
+              {
+                  lookup.DataSource(ds => ds.WebApi()
+                              .Controller("Proveedor") // Controlador que maneja los Proveedores
+                              .LoadAction("Get")) // Acción que carga la lista de Proveedores
+                              .ValueExpr("Id") // Campo que representa el ID en la clase Proveedor
+                              .DisplayExpr("Nombre"); // Campo que representa el nombre del Proveedor
+              })
+            .Caption("Proveedor");
+
+                                // Columna de comandos para editar/eliminar
+                                columns.Add()
+                                                            .Type(GridCommandColumnType.Buttons)
+                                                            .Width(150)
+                                                            .Buttons(buttons =>
+                                                            {
+                                                                buttons.Add().Name("edit").Icon("edit").CssClass("dx-icon-edit"); // Botón de editar
+                                                                buttons.Add().Name("delete").Icon("trash").CssClass("dx-icon-trash"); // Botón de eliminar
+                                                            })
+                                                            .Caption("Acciones"); // Encabezado de la columna
+                            })
+                                            .Editing(e => e
+                                                .Mode(GridEditMode.Popup) // Usa popup para edición
+                                                .AllowAdding(true)
+                                                .AllowUpdating(true)
+                                                .AllowDeleting(true)
+                                                .Popup(p => p
+                                                    .Title("Editar Cliente")
+                                                    .Width(1000)
+                                                    .Height(500)
+                                                )
+                                            )
+                                            .HeaderFilter(hf => hf.Visible(true)) // Filtros en encabezados
+                                            .Paging(p => p.PageSize(10)) // Configura la paginación
+                                            .Pager(pager => pager
+                                                .ShowPageSizeSelector(true)
+                                                .AllowedPageSizes(new[] { 10, 20, 50 })
+                                                .ShowInfo(true)
+                                            )
+                                            .RowAlternationEnabled(true) // Alternancia de color en filas
+                                            .HoverStateEnabled(true) // Efecto hover en filas
+                                            .ShowBorders(true) // Muestra bordes
+                                            .ColumnAutoWidth(true) // Ajusta automáticamente el ancho de columnas
+                                            .SearchPanel(sp => sp.Visible(true)) // Panel de búsqueda visible
+
+
+)
+
+
+
+

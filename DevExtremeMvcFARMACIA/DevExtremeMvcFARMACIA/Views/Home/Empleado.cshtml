@@ -1,0 +1,70 @@
+@using DevExtremeMvcFARMACIA.Models
+
+@{
+    /**/
+
+ 
+
+    ViewBag.Title = "Empleado";
+}
+<h2 style="color: #0094ff;">Empleados</h2>
+@(Html.DevExtreme().DataGrid<DevExtremeMvcFARMACIA.Models.Empleado>()
+                .DataSource(ds => ds.WebApi()
+                    .Controller("Empleado")
+                    .LoadAction("Get")
+                    .InsertAction("Post")
+                    .UpdateAction("Put")
+                    .DeleteAction("Delete")
+                    .Key("Id")
+                )
+                .RemoteOperations(true)
+                .Columns(columns =>
+                {
+                    columns.AddFor(m => m.Id).Caption("ID");
+                    columns.AddFor(m => m.Nombre).Caption("Nombre");
+                    columns.AddFor(m => m.Apellido).Caption("Apellido");
+                    columns.AddFor(m => m.Telefono).Caption("Teléfono");
+                    columns.AddFor(m => m.Cargo).Caption("Cargo");
+                    columns.AddFor(m => m.Salario).Caption("Salario");
+
+        // Columna de comandos para editar/eliminar
+        columns.Add()
+                        .Type(GridCommandColumnType.Buttons)
+                        .Width(150)
+                        .Buttons(buttons =>
+                        {
+                            buttons.Add().Name("edit").Icon("edit").CssClass("dx-icon-edit"); // Botón de editar
+                buttons.Add().Name("delete").Icon("trash").CssClass("dx-icon-trash"); // Botón de eliminar
+            })
+                        .Caption("Acciones"); // Encabezado de la columna
+    })
+                .Editing(e => e
+                    .Mode(GridEditMode.Popup) // Usa popup para edición
+                    .AllowAdding(true)
+                    .AllowUpdating(true)
+                    .AllowDeleting(true)
+                    .Popup(p => p
+                        .Title("Editar empleado")
+                        .Width(1000)
+                        .Height(500)
+                    )
+                )
+                .HeaderFilter(hf => hf.Visible(true)) // Filtros en encabezados
+                .Paging(p => p.PageSize(10)) // Configura la paginación
+                .Pager(pager => pager
+                    .ShowPageSizeSelector(true)
+                    .AllowedPageSizes(new[] { 10, 20, 50 })
+                    .ShowInfo(true)
+                )
+                .RowAlternationEnabled(true) // Alternancia de color en filas
+                .HoverStateEnabled(true) // Efecto hover en filas
+                .ShowBorders(true) // Muestra bordes
+                .ColumnAutoWidth(true) // Ajusta automáticamente el ancho de columnas
+                .SearchPanel(sp => sp.Visible(true)) // Panel de búsqueda visible
+                
+                
+)
+
+
+
+

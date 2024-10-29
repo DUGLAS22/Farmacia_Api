@@ -1,0 +1,43 @@
+# Ignorar archivos y carpetas de Visual Studio y DevExtreme
+.vs/
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+*.user
+*.suo
+
+# Ignorar dependencias de .NET
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Ignorar dependencias de Node.js (si usas DevExtreme con npm)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignorar archivos de configuración y temporales
+*.tmp
+*.temp
+*.log
+*.DS_Store
+Thumbs.db
+
+# Ignorar archivos específicos de DevExtreme y .NET en tu estructura de proyecto
+DevExtremeMvcFARMACIA/lib/
+DevExtremeMvcFARMACIA/packages/
+DevExtremeMvcFARMACIA/.vs/
+
+FARMACIA_API/.vs/
+FARMACIA_API/packages/
+FARMACIA_API/bin/
+FARMACIA_API/obj/
+
+# Ignorar carpetas de publicación y compilación
+publish/
+wwwroot/
+dist/

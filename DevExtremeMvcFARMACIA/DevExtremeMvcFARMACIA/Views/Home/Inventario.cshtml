@@ -1,0 +1,151 @@
+@using DevExtremeMvcFARMACIA.Models
+
+@{
+    /**/
+
+    /**/
+
+
+
+    ViewBag.Title = "Inventario";
+}
+
+<h2 style="color: #0094ff;">Inventario</h2>
+@(Html.DevExtreme().DataGrid<DevExtremeMvcFARMACIA.Models.Inventario>()
+        .DataSource(ds => ds.WebApi()
+            .Controller("Inventario")
+            .LoadAction("Get")
+            .InsertAction("Post")
+            .UpdateAction("Put")
+            .DeleteAction("Delete")
+            .Key("Id")
+        )
+        .RemoteOperations(true)
+        .Columns(columns =>
+        {
+            columns.AddFor(i => i.Id).Caption("ID");
+
+            columns.AddFor(i => i.ExistenciaInventario).Caption("Existencia");
+           
+
+
+            // Columna para Nombre del Medicamento (ComboBox)
+            columns.AddFor(i => i.MedicamentoId)
+                            .Caption("Medicamento")
+                            .Lookup(lookup =>
+                            {
+                                lookup.DataSource(ds => ds.WebApi()
+                                    .Controller("Medicamento") // Controlador que maneja los Medicamentos
+                                    .LoadAction("Get")) // Acción que carga la lista de Medicamentos
+                                    .ValueExpr("Id") // Campo que representa el ID en la clase Medicamento
+                                    .DisplayExpr("Nombre"); // Campo que representa el nombre del Medicamento
+                            })
+                            .Width(200);
+
+            // Columna para Presentación del Medicamento (ComboBox)
+            columns.Add()
+                            .Caption("Presentación")
+                            .Lookup(lookup =>
+                            {
+                                lookup.DataSource(ds => ds.WebApi()
+                                    .Controller("Medicamento") // Controlador que maneja los Medicamentos
+                                    .LoadAction("Get")) // Acción que carga la lista de Medicamentos
+                                    .ValueExpr("Id") // Campo que representa la presentación en la clase Medicamento
+                                    .DisplayExpr("Presentacion"); // Campo que representa la presentación del Medicamento
+                            })
+                            .Width(150);
+
+            // Columna para Precio del Medicamento (ComboBox)
+            columns.Add()
+                            .Caption("Precio")
+                            .Lookup(lookup =>
+                            {
+                                lookup.DataSource(ds => ds.WebApi()
+                                    .Controller("Medicamento") // Controlador que maneja los Medicamentos
+                                    .LoadAction("Get")) // Acción que carga la lista de Medicamentos
+                                    .ValueExpr("Id") // Campo que representa el precio en la clase Medicamento
+                                    .DisplayExpr("Precio"); // Campo que representa el precio del Medicamento
+                            })
+                            .Format("currency")
+                            .Format(format => format.Precision(2)) // 2 decimales
+                            .Width(100);
+
+            // Columna para Categoría del Medicamento (ComboBox)
+            columns.Add()
+                            .Caption("Categoría")
+                            .Lookup(lookup =>
+                            {
+                                lookup.DataSource(ds => ds.WebApi()
+                                    .Controller("Medicamento") // Controlador que maneja los Medicamentos
+                                    .LoadAction("Get")) // Acción que carga la lista de Medicamentos
+                                    .ValueExpr("Id") // Campo que representa la categoría en la clase Medicamento
+                                    .DisplayExpr("Categoria"); // Campo que representa la categoría del Medicamento
+                            })
+                            .Width(150);
+            columns.Add()
+                .Caption("Cantidad")
+                .Lookup(lookup =>
+                {
+                    lookup.DataSource(ds => ds.WebApi()
+                        .Controller("Medicamento") // Controlador que maneja los Medicamentos
+                        .LoadAction("Get")) // Acción que carga la lista de Medicamentos
+                        .ValueExpr("Id") // Campo que representa la categoría en la clase Medicamento
+                        .DisplayExpr("Existencia"); // Campo que representa la categoría del Medicamento
+
+                })
+                .Width(150);
+            columns.Add()
+              .Caption("Proveedor")
+              .Lookup(lookup =>
+              {
+                  lookup.DataSource(ds => ds.WebApi()
+                      .Controller("Proveedor") // Controlador que maneja los Medicamentos
+                      .LoadAction("Get")) // Acción que carga la lista de Medicamentos
+                      .ValueExpr("Id") // Campo que representa la categoría en la clase Medicamento
+                      .DisplayExpr("Nombre"); // Campo que representa la categoría del Medicamento
+
+              })
+              .Width(150);
+
+
+            // Columna de comandos para editar/eliminar
+            columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(150)
+                .Buttons(buttons =>
+                {
+                    buttons.Add().Name("edit").Icon("edit").CssClass("dx-icon-edit"); // Botón de editar
+                    buttons.Add().Name("delete").Icon("trash").CssClass("dx-icon-trash"); // Botón de eliminar
+                })
+                .Caption("Acciones"); // Encabezado de la columna
+        })
+        .Editing(e => e
+            .Mode(GridEditMode.Popup) // Usa popup para edición
+            .AllowAdding(true)
+            .AllowUpdating(true)
+            .AllowDeleting(true)
+            .Popup(p => p
+                .Title("Editar Inventario")
+                .Width(800)
+                .Height(500)
+            )
+        )
+        .HeaderFilter(hf => hf.Visible(true)) // Filtros en encabezados
+        .Paging(p => p.PageSize(10)) // Configura la paginación
+        .Pager(pager => pager
+            .ShowPageSizeSelector(true)
+            .AllowedPageSizes(new[] { 10, 20, 50 })
+            .ShowInfo(true)
+        )
+        .RowAlternationEnabled(true) // Alternancia de color en filas
+        .HoverStateEnabled(true) // Efecto hover en filas
+        .ShowBorders(true) // Muestra bordes
+        .ColumnAutoWidth(true) // Ajusta automáticamente el ancho de columnas
+        .SearchPanel(sp => sp.Visible(true)) // Panel de búsqueda visible
+)
+
+
+
+
+
+

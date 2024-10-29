@@ -1,0 +1,100 @@
+﻿body {
+    
+}
+
+.dx-datagrid-rowsview .dx-row.dx-row-alt {
+    background-color: #2196F3 !important;
+}
+
+
+.dx-icon-edit:before {
+    content: "\e3c9";
+    color: #00ff21; 
+}
+
+.dx-icon-trash:before {
+    content: "\e872"; /* Código del ícono de basurero */
+    color: #f44336; /* Color rojo para el ícono de eliminar */
+}
+
+
+.dx-icon-save:before {
+    content: "\e161" !important; /* Código del ícono de guardar */
+    color: #00ff21 !important; /* Color azul para el ícono de guardar */
+}
+
+.dx-icon-revert:before {
+    content: "\e15a" !important; /* Código del ícono de cancelar */
+    color: #FF5722 !important; /* Color naranja para el ícono de cancelar */
+}
+
+/* Estilo para la ventana emergente (popup) */
+
+
+.dx-popup-title {
+    background-color: #2196F3 !important; /* Fondo negro para el título de la ventana emergente */
+    color: #FFFFFF !important; /* Texto blanco para el título */
+    padding: 10px !important; /* Espaciado interno del título */
+    border-top-left-radius: 8px !important; /* Bordes redondeados en la esquina superior izquierda */
+    border-top-right-radius: 8px !important; /* Bordes redondeados en la esquina superior derecha */
+}
+
+/* Estilo para los botones de guardar y cancelar en la ventana emergente */
+.dx-popup-buttons .dx-button {
+    background-color: #2196F3 !important; /* Color azul para el botón de guardar */
+    color: #FFFFFF !important; /* Texto blanco en el botón de guardar */
+    border: none !important; /* Sin borde en el botón de guardar */
+    margin-right: 10px !important; /* Espacio entre los botones */
+}
+
+    .dx-popup-buttons .dx-button.dx-button-cancel {
+        background-color: #FF5722 !important; /* Color naranja para el botón de cancelar */
+        color: #FFFFFF !important; /* Texto blanco en el botón de cancelar */
+    }
+.dx-datagrid-headers {
+    background-color: #000000 !important; /* Fondo negro para el encabezado */
+    color: #FFFFFF !important; /* Texto blanco en el encabezado */
+    border-bottom: 2px solid #000000 !important; /* Borde inferior negro en el encabezado */
+}
+/* Estilos para la ventana emergente de DevExtreme */
+.dx-popup-content {
+    border: 2px solid #2196F3 !important; /* Borde negro en la ventana emergente */
+    border-radius: 8px !important; /* Bordes redondeados */
+    background-color: #2196F3 !important; /* Fondo gris oscuro para la ventana emergente */
+    color: #FFFFFF !important; /* Texto blanco */
+}
+
+    .dx-popup-buttons .dx-button.dx-button-cancel {
+        background-color: #FF5722 !important; /* Color naranja para el botón de cancelar */
+        color: #FFFFFF !important; /* Texto blanco */
+    }
+
+    .dx-popup-buttons .dx-button.dx-button-save {
+        background-color: #4CAF50 !important; /* Color verde para el botón de guardar */
+        color: #FFFFFF !important; /* Texto blanco */
+    }
+/* Estilos para el filtro del encabezado del DataGrid */
+
+
+    .dx-header-filter .dx-texteditor-input {
+        background-color: #2196F3 !important; /* Fondo gris medio para el campo de entrada del filtro */
+        color: #000000 !important; /* Texto blanco */
+        border: 1px solid #666666 !important; /* Borde gris claro */
+    }
+
+    .dx-header-filter .dx-button {
+        background-color: #FFFFFF !important; /* Color azul para el botón de filtro */
+        color: #FFFFFF !important; /* Texto blanco */
+        border: none !important; /* Sin borde */
+        border-radius: 4px !important; /* Bordes redondeados */
+        padding: 6px 12px !important; /* Espaciado interno */
+        font-size: 14px !important; /* Tamaño de fuente */
+    }
+.dx-datagrid-rowsview .dx-row:hover {
+    background-color: #728df7; /* Cambia el color de fondo de la fila al pasar el mouse */
+    cursor: pointer; /* Cambia el cursor a un puntero */
+}
+
+
+
+
